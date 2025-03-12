@@ -59,11 +59,16 @@ app.put('/tasks/:id', (req ,res)=>{
     }
 })
 
-// upprimer une tâche (DELETE /tasks/:id)
+// Supprimer une tâche (DELETE /tasks/:id)
 app.delete('/task/:id', (req,res)=>{
     const taskId=parseInt(req.params.id)
-    tasks= tasks.filter(task=>task.id===taskId)
-    res.json({message:'la tâche est supprimée'})
+   const taskSupp= tasks.findIndex(task=>task.id===taskId)
+    if (taskSupp === -1) {
+       return res.status(404).json({message:'la tâche est introuvable'})
+
+    } 
+        tasks.splice(taskSupp,1)
+    res.json({message:`la tache est supp`})
 })
 
 
